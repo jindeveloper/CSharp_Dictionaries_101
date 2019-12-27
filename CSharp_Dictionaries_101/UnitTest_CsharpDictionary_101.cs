@@ -134,6 +134,7 @@ namespace CSharp_Dictionaries_101
             Assert.True(!string.IsNullOrEmpty(result));
         }
 
+
         [Fact]
         public void Test_Dictionary_GetValues_And_Update()
         {
@@ -165,6 +166,30 @@ namespace CSharp_Dictionaries_101
                 Assert.True(basketBallPlayers[result.Key] != "Michael Jordan");
                 Assert.True(basketBallPlayers[result.Key] == "Magic Johnson");
             }
+        }
+
+        [Fact]
+        public void Test_Dictionary_Remove_Item_WithIn_The_Collection()
+        {
+            //initialize new basketaball players
+            var basketBallPlayers = new Dictionary<string, string>
+            {
+                ["MJ"] = "Michael Jordan",
+                ["KD"] = "Kevin Durant",
+                ["KJ"] = "Kill Joy"
+            };
+
+            Assert.Throws<ArgumentNullException>(() => basketBallPlayers.Remove(null));
+
+            //let us remove the key MJ
+            var removedAtFirstAttempt = basketBallPlayers.Remove("MJ");
+
+            Assert.True(removedAtFirstAttempt);
+
+            //let us try to remove MJ a non existing key
+            var removedAtSecondAttempt = basketBallPlayers.Remove("MJ");
+
+            Assert.False(removedAtSecondAttempt);
         }
     }
 }
